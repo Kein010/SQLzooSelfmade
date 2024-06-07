@@ -1,15 +1,15 @@
 import 'package:mysql1/mysql1.dart';
 
-MySqlConnection connection;
+//MySqlConnection connection;
 
 try {
-  connection = await MySqlConnection.connect(
+  final connection = await MySqlConnection.connect(
     ConnectionSettings(
-      host: 'your_host',
-      port: your_port,
-      user: 'your_user',
-      password: 'your_password',
-      db: 'your_database',
+      host: 'localhost',//your_localhost
+      port: 8080,//your_port
+      user: 'root',//your_user
+      password: 'superSecret',//your_password
+      db: 'testdb',//your_database
     ),
   );
 } catch (e) {
