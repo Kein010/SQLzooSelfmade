@@ -1,6 +1,6 @@
 # SQLzooSelfmade
 
-![IMG_20240517_092032_884](https://github.com/Kein010/SQLzooSelfmade/assets/65433186/36add4d5-436d-4065-832b-773cc1de0350)
+![335470877-36add4d5-436d-4065-832b-773cc1de0350](https://github.com/Kein010/SQLzooSelfmade/assets/65433186/cd046dbd-386d-4d22-87dc-0bda19306d76)
 
 https://github.com/RivaanRanawat/instagram-flutter-clone
 
