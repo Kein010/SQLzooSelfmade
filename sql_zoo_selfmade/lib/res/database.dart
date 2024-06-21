@@ -1,20 +1,16 @@
 import 'package:mysql1/mysql1.dart';
 
-// MySqlConnection connection;
-
-// try {
-//   final connection = await MySqlConnection.connect(
-//     ConnectionSettings(
-//       host: 'localhost',//your_localhost
-//       port: 8080,//your_port
-//       user: 'root',//your_user
-//       password: 'superSecret',//your_password
-//       db: 'testdb',//your_database
-//     ),
-//   );
-// } catch (e) {
-//   print(e);
-// }
+Future<void> connectToDatabase() async {
+final connectionResult = await MySqlConnection.connect(
+  ConnectionSettings(
+    host: 'localhost',//your_localhost
+    port: 8080,//your_port
+    user: 'root',//your_user
+    password: 'superSecret',//your_password
+    db: 'testdb',//your_database
+  ),
+);
+}
 
 // String query = 'SELECT * FROM your_table WHERE your_column LIKE %?%';
 // List<List<dynamic>> results;
