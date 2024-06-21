@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Screens/Login.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,136 +8,143 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Text Eingabe Beispiel',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: MyHomePage(),
+      routes: {
+        '/second': (context) => SecondPage(),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  MyHomePageState createState() => MyHomePageState();
-}
-
-class MyHomePageState extends State<MyHomePage> {
-  final List<TextEditingController> controllers = List.generate(10, (_) => TextEditingController());
-  final List<String> displayTexts = List.generate(10, (_) => '');
-
-  void updateText(int index) {
-    setState(() {
-      displayTexts[index] = controllers[index].text;
-    });
-  }
-
-  bool isCorrect(String text) {
-    // Beispiel für korrekten Text. Passen Sie dies nach Bedarf an.
-    return text == 'Flutter';
-  }
-
-  @override
-  void dispose() {
-    for (var controller in controllers) {
-      controller.dispose();
-    }
-    super.dispose();
-  }
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Text Eingabe Beispiel'),
+        title: Text('Text Eingabe und Überprüfung'),
+        actions: [
+          UserProfileButton(),
+        ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
+      drawer: AppDrawer(),
+      body: TextInputList(),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Text Eingabe und Überprüfung - Seite 2'),
+        actions: [
+          UserProfileButton(),
+        ],
+      ),
+      drawer: AppDrawer(),
+      body: TextInputList(),
+    );
+  }
+}
+
+class AppDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text(
+              'Menü',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
               ),
-              child: Text(
-                'Menü',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () {
+              Navigator.pushNamed(context, '/');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.pageview),
+            title: Text('Seite 2'),
+            onTap: () {
+              Navigator.pushNamed(context, '/second');
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TextInputList extends StatefulWidget {
+  @override
+  _TextInputListState createState() => _TextInputListState();
+}
+
+class _TextInputListState extends State<TextInputList> {
+  final List<TextEditingController> _controllers = List.generate(10, (_) => TextEditingController());
+  final List<String> _correctAnswers = List.generate(10, (index) => 'Antwort ${index + 1}');
+  final List<String?> _results = List.generate(10, (_) => null);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            for (int i = 0; i < 10; i++) 
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0), // Abstand zwischen den Zeilen verringert
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Geben Sie Text ${i + 1} ein:'),
+                          SizedBox(height: 2), // Abstand zwischen Text und Textfeld verringert
+                          TextField(
+                            controller: _controllers[i],
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 2), // Abstand zwischen Textfeld und Button verringert
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _results[i] = _controllers[i].text == _correctAnswers[i] ? 'correct' : 'wrong';
+                          });
+                        },
+                        child: Text('Check'),
+                      ),
+                    ),
+                    SizedBox(width: 2), // Abstand zwischen Button und Icon verringert
+                    Expanded(
+                      child: _results[i] == null
+                          ? Container()
+                          : Icon(
+                              _results[i] == 'correct' ? Icons.check : Icons.close,
+                              color: _results[i] == 'correct' ? Colors.green : Colors.red,
+                            ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Startseite'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.navigate_next),
-              title: Text('Weitere Seite'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Bitte Text eingeben:',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Eingabe ${index + 1}:',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: TextField(
-                                controller: controllers[index],
-                                decoration: InputDecoration(labelText: 'Eingabe ${index + 1}'),
-                              ),
-                            ),
-                            SizedBox(width: 8),
-                            ElevatedButton(
-                              onPressed: () => updateText(index),
-                              child: Text('Aktualisieren'),
-                            ),
-                            SizedBox(width: 8),
-                            if (displayTexts[index].isNotEmpty)
-                              Icon(
-                                isCorrect(displayTexts[index]) ? Icons.check : Icons.close,
-                                color: isCorrect(displayTexts[index]) ? Colors.green : Colors.red,
-                              )
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
           ],
         ),
       ),
@@ -146,4 +152,63 @@ class MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class UserProfileButton extends StatefulWidget {
+  @override
+  _UserProfileButtonState createState() => _UserProfileButtonState();
+}
 
+class _UserProfileButtonState extends State<UserProfileButton> {
+  String? _username;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: CircleAvatar(
+        backgroundColor: Colors.grey,
+        child: _username == null
+            ? Text('')
+            : Text(
+                _username!.substring(0, 2),
+                style: TextStyle(color: Colors.white),
+              ),
+      ),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(_username == null ? 'Anmelden' : 'Abmelden'),
+            content: _username == null
+                ? TextField(
+                    decoration: InputDecoration(labelText: 'Benutzername'),
+                    onChanged: (value) {
+                      setState(() {
+                        _username = value;
+                      });
+                    },
+                  )
+                : Text('Möchten Sie sich abmelden?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Abbrechen'),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    if (_username != null) {
+                      _username = null;
+                    }
+                    Navigator.of(context).pop();
+                  });
+                },
+                child: Text(_username == null ? 'Anmelden' : 'Abmelden'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
