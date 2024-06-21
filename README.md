@@ -16,3 +16,6 @@ Komplexität der Statements - 5 leicht 5 mittel 5 schwer 😘
 Video/Bilder - nicht unser Bier - nächster Jahrgang macht das - muss nur halt erweiterbar sein 😘
 Abgabe - 30.06 20 Uhr - Abgabe kann so abgeben werden wie wir wollen, Hauptsache how to setup ist gegeben 😘
 nicht funktionale Bedingung sind größtenteils zu irgnorieren oder so 😘
+
+https://www.darttutorial.org/dart-tutorial/dart-try-catch/
+https://dart.dev/language/error-handling
