@@ -1,16 +1,19 @@
 import 'package:mysql1/mysql1.dart';
 
-Future<void> connectToDatabase() async {
+Future<MySqlConnection> connectToDatabase(String host, int port, String user, String password, String db) async {
 final connectionResult = await MySqlConnection.connect(
   ConnectionSettings(
-    host: 'localhost',//your_localhost
-    port: 8080,//your_port
-    user: 'root',//your_user
-    password: 'superSecret',//your_password
-    db: 'testdb',//your_database
+    host: host,//your_localhost
+    port: port,//your_port
+    user: user,//your_user
+    password: password,//your_password
+    db: db,//your_database
   ),
 );
+  return connectionResult; //TODO add error hanlding where this method is getting called
 }
+
+// await connection.query('SELECT * FROM your_table');
 
 // String query = 'SELECT * FROM your_table WHERE your_column LIKE %?%';
 // List<List<dynamic>> results;
