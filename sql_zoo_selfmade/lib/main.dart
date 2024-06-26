@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'sideBar.dart';
-import 'screens/login.dart';
-import 'textImputList.dart';
+import 'side_bar.dart';
+import 'answers.dart';
+import 'screens/user_profile_button.dart';
+import 'text_imput_list.dart';
+import 'second_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,35 +26,19 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Text Eingabe und Überprüfung'),
-        actions: [
-          UserProfileButton(),
-        ],
+        title: Text('Main Page'),
+        actions: [UserProfileButton()],
       ),
       drawer: AppDrawer(),
-      body: TextInputList(),
+      body: TextInputList(
+        correctAnswers: correctAnswersFirstPage,
+        fixedTexts: fixedTextsFirstPage,
+      ),
     );
   }
 }
 
-class SecondPage extends StatelessWidget {
-  const SecondPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Text Eingabe und Überprüfung - Seite 2'),
-        actions: [
-          UserProfileButton(),
-        ],
-      ),
-      drawer: AppDrawer(),
-      body: TextInputList(),
-    );
-  }
-}
