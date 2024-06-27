@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sql_zoo_selfmade/res/userData.dart';
 
 class UserProfileButton extends StatefulWidget {
   @override
@@ -11,6 +12,8 @@ class _UserProfileButtonState extends State<UserProfileButton> {
   void _showLoginDialog() {
     TextEditingController usernameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    //String name = usernameController.text;
+    //String password = passwordController.text;
 
     showDialog(
       context: context,
@@ -20,6 +23,10 @@ class _UserProfileButtonState extends State<UserProfileButton> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+               TextField(
+                controller: usernameController,
+                decoration: InputDecoration(labelText: 'Email(Dommy)'),
+              ),
               TextField(
                 controller: usernameController,
                 decoration: InputDecoration(labelText: 'Username'),
@@ -28,10 +35,25 @@ class _UserProfileButtonState extends State<UserProfileButton> {
                 controller: passwordController,
                 decoration: InputDecoration(labelText: 'Password'),
                 obscureText: true,
+                
               ),
             ],
           ),
           actions: [
+             TextButton(
+              child: Text('Deleate Account'), 
+              onPressed: () async{
+                bool result = await deleatUser(usernameController.text);
+                if(result)
+                {
+                
+                  //message:  Erfolgreichgelöscht 
+                }
+                else{
+                  //message:  konnte nicht gelöscht werden
+                }
+              },
+            ),
             TextButton(
               child: Text('Cancel'),
               onPressed: () {
@@ -40,7 +62,18 @@ class _UserProfileButtonState extends State<UserProfileButton> {
             ),
             TextButton(
               child: Text('Login'),
-              onPressed: () {
+              onPressed: () async {
+                connectToDatabaseTest();
+                bool test = await checkIfUserExists(usernameController.text, passwordController.text);
+
+                if(test)
+                {
+                  //messeage: user Angemeldet oder neu erstellt
+                }
+                else{
+                  //message: nicht alle daten daten angegeben.
+                }
+
                 setState(() {
                   isLoggedIn = true;
                   username = usernameController.text;
@@ -83,7 +116,7 @@ class _UserProfileButtonState extends State<UserProfileButton> {
       icon: CircleAvatar(
         backgroundColor: isLoggedIn ? Colors.blue : Colors.grey,
         child: Text(
-          isLoggedIn ? username.substring(0, 2).toUpperCase() : '',
+          isLoggedIn ? username.substring(0, 2).toUpperCase() : '', //TODO catch error when no input
           style: TextStyle(color: Colors.white),
         ),
       ),

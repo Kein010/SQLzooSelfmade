@@ -13,6 +13,9 @@ final connectionResult = await MySqlConnection.connect(
   return connectionResult; //TODO add error hanlding where this method is getting called
 }
 
+
+
+
 // await connection.query('SELECT * FROM your_table');
 
 // String query = 'SELECT * FROM your_table WHERE your_column LIKE %?%';
@@ -28,3 +31,4 @@ final connectionResult = await MySqlConnection.connect(
 //   // Access the columns using row[column_index]
 //   // For example: row[0] for the first column
 //   }
+
