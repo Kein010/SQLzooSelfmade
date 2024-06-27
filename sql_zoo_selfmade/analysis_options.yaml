@@ -9,7 +9,11 @@
 # packages, and plugins designed to encourage good coding practices.
 analyzer:
   errors:
-    file_names: ignore
+    #from main branch
+    file_names: ignore 
+    #from LeonYay branch
+    non_constant_identifier_names: ignore 
+
 include: package:flutter_lints/flutter.yaml
 
 linter:
