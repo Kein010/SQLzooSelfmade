@@ -43,7 +43,7 @@ class _UserProfileButtonState extends State<UserProfileButton> {
              TextButton(
               child: Text('Deleate Account'), 
               onPressed: () async{
-                bool result = await deleatUser(usernameController.text);
+                bool result = await deleteUser(usernameController.text);
                 if(result)
                 {
                 

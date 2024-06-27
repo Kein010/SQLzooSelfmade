@@ -1,4 +1,5 @@
 import 'package:mysql1/mysql1.dart';
+import 'dart:io';
 
 Future<MySqlConnection> connectToDatabase(String host, int port, String user, String password, String db) async {
 final connectionResult = await MySqlConnection.connect(
@@ -14,6 +15,22 @@ final connectionResult = await MySqlConnection.connect(
 }
 
 
+// ungetestet aber sont alles da  um
+
+Future resetDatabase(String host, int port, String user, String password, String db, String query) async {
+  // Verbindung zur Datenbank herstellen
+  final connection = await connectToDatabase(host, port, user, password, db);
+  try {
+
+      String sqlInsert = await File('InsertData.sql').readAsString();
+      
+      // SQL-Befehl ausführen
+      await connection.query(sqlInsert);
+  } finally {
+    // Verbindung schließen
+    await connection.close();
+  }
+}
 
 
 // await connection.query('SELECT * FROM your_table');

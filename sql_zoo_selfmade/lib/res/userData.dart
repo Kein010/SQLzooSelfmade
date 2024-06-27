@@ -6,7 +6,7 @@ import 'package:mysql1/mysql1.dart';
 Future <bool> checkIfUserExists(String username, String password) async {
 
   if (username.isNotEmpty && password.isNotEmpty) {
-    final conn = await connectToDatabase("localhost", 3306, "root", "root", "sakila");
+    final conn = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
     var result = await conn.query("SELECT * FROM users Where username = username AND password = password", [username, password]);
     if(result.isEmpty) {
       ("INSERT Into users username, password values username, password", [username, password]);
@@ -22,8 +22,8 @@ return false;
   // assaign userApp to userDatabase
 }
 
-Future <bool> deleatUser(String username) async{
-  final conn = await connectToDatabase("localhost", 3306, "root", "root", "sakila");
+Future <bool> deleteUser(String username) async{
+  final conn = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
 var result = await conn.query("DELEATE FROM users Where username = username", [username]);
 if (result.affectedRows! > 0) {
   return true;
@@ -34,7 +34,7 @@ else{
 }
 
 void connectToDatabaseTest() async {
-  final conn = await connectToDatabase("localhost", 3306, "root", "root", "sakila");
+  final conn = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
 
   final results = await conn.query("SELECT * FROM actor");
 
