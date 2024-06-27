@@ -1,7 +1,21 @@
 # SQLzooSelfmade
 
-![335470877-36add4d5-436d-4065-832b-773cc1de0350](https://github.com/Kein010/SQLzooSelfmade/assets/65433186/90a835d9-3d57-4cc2-8084-ca38e575ed5a)
+![335470877-36add4d5-436d-4065-832b-773cc1de0350](https://github.com/Kein010/SQLzooSelfmade/assets/65433186/cd046dbd-386d-4d22-87dc-0bda19306d76)
 
 https://github.com/RivaanRanawat/instagram-flutter-clone
 
 ![John_the_being](https://github.com/Kein010/SQLzooSelfmade/assets/65433186/1e7f129e-74a8-42c5-bef0-f2658ccc734a)
+
+Sakila DB - MariaDB oder MySql 😘
+Berechtigung - Default User - Benuter &  password - dummy email - sicherheit nicht von bedeutung (sollte aber erweiterbar sein) 😘
+Performance - wird später online gestellt - sollte automatisch erfüllt sein 😘
+Sicherheit - not important yet - aber verhinder das die Befehle nicht die DB verändern und andere User davon betroffen werden 😘
+Testbarkeit - nächstes Halbjahr (also nicht jetzt) 😘
+Dokumenation - Bewertungskriterien - in Betriebnahme Dokumentieren 😘
+Komplexität der Statements - 5 leicht 5 mittel 5 schwer 😘
+Video/Bilder - nicht unser Bier - nächster Jahrgang macht das - muss nur halt erweiterbar sein 😘
+Abgabe - 30.06 20 Uhr - Abgabe kann so abgeben werden wie wir wollen, Hauptsache how to setup ist gegeben 😘
+nicht funktionale Bedingung sind größtenteils zu irgnorieren oder so 😘
+
+https://www.darttutorial.org/dart-tutorial/dart-try-catch/
+https://dart.dev/language/error-handling
