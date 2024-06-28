@@ -18,16 +18,13 @@ final connectionResult = await MySqlConnection.connect(
 // ungetestet aber sont alles da  um
 
 Future resetDatabase(String host, int port, String user, String password, String db, String query) async {
-  // Verbindung zur Datenbank herstellen
   final connection = await connectToDatabase(host, port, user, password, db);
   try {
-
+      //SQL Befehl aus Datei holen
       String sqlInsert = await File('InsertData.sql').readAsString();
       
-      // SQL-Befehl ausführen
       await connection.query(sqlInsert);
   } finally {
-    // Verbindung schließen
     await connection.close();
   }
 }

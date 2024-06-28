@@ -15,10 +15,7 @@ Future <bool> checkIfUserExists(String username, String password) async {
   return true;
 }
 return false;
-  // check if username and password are filled
-  // handling if string are not filled  
-  // check if user exists
-  // add user if user does not exist
+
   // assaign userApp to userDatabase
 }
 

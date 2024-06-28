@@ -25,7 +25,7 @@ class _UserProfileButtonState extends State<UserProfileButton> {
             children: [
                TextField(
                 controller: usernameController,
-                decoration: InputDecoration(labelText: 'Email(Dommy)'),
+                decoration: InputDecoration(labelText: 'Email(Dummy)'),
               ),
               TextField(
                 controller: usernameController,
@@ -46,11 +46,10 @@ class _UserProfileButtonState extends State<UserProfileButton> {
                 bool result = await deleteUser(usernameController.text);
                 if(result)
                 {
-                
-                  //message:  Erfolgreichgelöscht 
+                   _showMessageDialog(context, 'Erfolgreich gelöscht');
                 }
                 else{
-                  //message:  konnte nicht gelöscht werden
+                  _showMessageDialog(context, "Konnte nicht gelöscht werden");
                 }
               },
             ),
@@ -68,10 +67,10 @@ class _UserProfileButtonState extends State<UserProfileButton> {
 
                 if(test)
                 {
-                  //messeage: user Angemeldet oder neu erstellt
+                 _showMessageDialog(context, "User angemeldet oder neu erstellt");
                 }
                 else{
-                  //message: nicht alle daten daten angegeben.
+                   _showMessageDialog(context, "Nicht alle Daten angegeben.");
                 }
 
                 setState(() {
@@ -130,3 +129,22 @@ class _UserProfileButtonState extends State<UserProfileButton> {
     );
   }
 }
+  Future<void> _showMessageDialog(BuildContext context, String message) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Info'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
