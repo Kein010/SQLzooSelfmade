@@ -31,10 +31,16 @@ else{
 }
 
 void connectToDatabaseTest() async {
-  final conn = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
-
-  final results = await conn.query("SELECT * FROM actor");
+  
 
   print("Debuging show results: ");
-  print(results);
+  //print(results);
+  try {
+    final conn = await connectToDatabase("127.0.0.1", 3306, "root'@'%", "PASSWORD", "sakila");
+
+    final results = await conn.query("SELECT * FROM actor");
+  }catch (e) {
+    print(e);
+  }
+  //print(results);
 }
