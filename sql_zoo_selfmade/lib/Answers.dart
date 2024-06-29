@@ -1,23 +1,25 @@
 // answers.dart
+import 'dart:js_interop';
+
 import 'package:mysql_utils/mysql_utils.dart';
 import 'package:sql_zoo_selfmade/res/database.dart';
 import 'package:sql_zoo_selfmade/res/userData.dart';
 
-Future<MysqlUtils> connection = connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
+//Future<MysqlUtils> connection = connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
 
-final List<Future<ResultFormat>> correctAnswersFirstPage = [
+final List<List<dynamic>> correctAnswersFirstPage = [
   
   
-  sql("SELECT * FROM actor", connection),  
-  sql("SELECT * FROM actor", connection),
-  sql("SELECT * FROM actor", connection),
-  sql("SELECT * FROM actor", connection),
-  sql("SELECT * FROM actor", connection),
-  sql("SELECT * FROM actor", connection),
-  sql("SELECT * FROM actor", connection),
-  sql("SELECT * FROM actor", connection),
-  sql("SELECT * FROM actor", connection),
-  sql("SELECT * FROM actor", connection),
+  sqlDynamicDynamic("SELECT * FROM actor"),  
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
   
   /*
   'Antwort 1.1',
@@ -47,8 +49,21 @@ final List<String> fixedTextsFirstPage = [
   'Fester Text 10.1',
 ];
 
-final List<Future<ResultFormat>> correctAnswersSecondPage = [
+final List<List<dynamic>> correctAnswersSecondPage = [
   
+  
+  sqlDynamicDynamic("SELECT * FROM actor"),  
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+
+  /*
   sql("SELECT * FROM actor", connection),  
   sql("SELECT * FROM actor", connection),
   sql("SELECT * FROM actor", connection),
@@ -59,7 +74,8 @@ final List<Future<ResultFormat>> correctAnswersSecondPage = [
   sql("SELECT * FROM actor", connection),
   sql("SELECT * FROM actor", connection),
   sql("SELECT * FROM actor", connection),
-  
+  */
+
   /*
   'Antwort 1.2',
   'Antwort 2.2',
@@ -86,3 +102,15 @@ final List<String> fixedTextsSecondPage = [
   'Fester Text 9.2',
   'Fester Text 10.2',
 ];
+
+List<dynamic> sqlDynamicDynamic(String sql) {
+  List<dynamic> dbList = [];
+  
+  sqlDynamic(sql).then((result) {
+    result.forEach((row) {
+      dbList.add(row);
+    });
+  });
+
+  return dbList;
+}
