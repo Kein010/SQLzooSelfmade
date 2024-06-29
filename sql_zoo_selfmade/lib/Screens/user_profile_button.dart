@@ -12,6 +12,7 @@ class _UserProfileButtonState extends State<UserProfileButton> {
   void _showLoginDialog() {
     TextEditingController usernameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
     //String name = usernameController.text;
     //String password = passwordController.text;
 
@@ -24,7 +25,8 @@ class _UserProfileButtonState extends State<UserProfileButton> {
             mainAxisSize: MainAxisSize.min,
             children: [
                TextField(
-                controller: usernameController,
+                //TODO add check if email is actually valid
+                controller: emailController,
                 decoration: InputDecoration(labelText: 'Email(Dummy)'),
               ),
               TextField(
@@ -64,7 +66,7 @@ class _UserProfileButtonState extends State<UserProfileButton> {
               onPressed: () async {
                 connectToDatabaseTest();
                 //TODO add email
-                bool test = await checkIfUserExists(usernameController.text, usernameController.text, passwordController.text);
+                bool test = await checkIfUserExists(emailController.text, usernameController.text, passwordController.text);
                 setState(() {
                   if (test) {
                     isLoggedIn = true;

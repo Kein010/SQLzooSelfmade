@@ -1,5 +1,25 @@
 // answers.dart
-final List<String> correctAnswersFirstPage = [
+import 'package:mysql_utils/mysql_utils.dart';
+import 'package:sql_zoo_selfmade/res/database.dart';
+import 'package:sql_zoo_selfmade/res/userData.dart';
+
+Future<MysqlUtils> connection = connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
+
+final List<Future<ResultFormat>> correctAnswersFirstPage = [
+  
+  
+  sql("SELECT * FROM actor", connection),  
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  
+  /*
   'Antwort 1.1',
   'Antwort 2.1',
   'Antwort 3.1',
@@ -10,6 +30,8 @@ final List<String> correctAnswersFirstPage = [
   'Antwort 8.1',
   'Antwort 9.1',
   'Antwort 10.1',
+  */
+
 ];
 
 final List<String> fixedTextsFirstPage = [
@@ -25,7 +47,20 @@ final List<String> fixedTextsFirstPage = [
   'Fester Text 10.1',
 ];
 
-final List<String> correctAnswersSecondPage = [
+final List<Future<ResultFormat>> correctAnswersSecondPage = [
+  
+  sql("SELECT * FROM actor", connection),  
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  sql("SELECT * FROM actor", connection),
+  
+  /*
   'Antwort 1.2',
   'Antwort 2.2',
   'Antwort 3.2',
@@ -36,6 +71,7 @@ final List<String> correctAnswersSecondPage = [
   'Antwort 8.2',
   'Antwort 9.2',
   'Antwort 10.2',
+  */
 ];
 
 final List<String> fixedTextsSecondPage = [

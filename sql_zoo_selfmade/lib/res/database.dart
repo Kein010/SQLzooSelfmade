@@ -1,5 +1,4 @@
 import 'package:mysql_utils/mysql_utils.dart';
-import 'dart:io';
 
 /// Connects to a MySQL database using the provided [host], [port], [user], [password], and [db] parameters.
 ///
@@ -59,19 +58,6 @@ Future<MysqlUtils> connectToDatabase(String host, int port, String user, String 
   return connectionResult; //TODO add error hanlding where this method is getting called
 }
 
-// untested but otherwise everything is ready to continue
-
-Future resetDatabase(String query) async {
-  final connection = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
-  try {
-      //Get SQL commands from file
-      String sqlInsert = await File('InsertData.sql').readAsString();
-      
-      await connection.query(sqlInsert);
-  } finally {
-    await connection.close();
-  }
-}
 
 
 // await connection.query('SELECT * FROM your_table');

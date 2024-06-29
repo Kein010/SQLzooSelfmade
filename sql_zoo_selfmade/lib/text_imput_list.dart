@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:mysql_utils/mysql_utils.dart';
+import 'package:sql_zoo_selfmade/res/userData.dart';
 
 class TextInputList extends StatefulWidget {
-  final List<String> correctAnswers;
+  final List<Future<ResultFormat>> correctAnswers;
   final List<String> fixedTexts;
 
   TextInputList({required this.correctAnswers, required this.fixedTexts});
@@ -50,7 +51,7 @@ class _TextInputListState extends State<TextInputList> {
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            _results[i] = _controllers[i].text == widget.correctAnswers[i] ? 'correct' : 'wrong';
+                            _results[i] = sqlAutoConn(_controllers[i].text) == widget.correctAnswers[i] ? 'correct' : 'wrong';
                           });
                         },
                         child: Text('Check'),
