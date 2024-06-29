@@ -63,21 +63,20 @@ class _UserProfileButtonState extends State<UserProfileButton> {
               child: Text('Login'),
               onPressed: () async {
                 connectToDatabaseTest();
-                bool test = await checkIfUserExists(usernameController.text, passwordController.text);
-
-                if(test)
-                {
-                 _showMessageDialog(context, "User angemeldet oder neu erstellt");
-                }
-                else{
-                   _showMessageDialog(context, "Nicht alle Daten angegeben.");
-                }
-
+                //TODO add email
+                bool test = await checkIfUserExists(usernameController.text, usernameController.text, passwordController.text);
                 setState(() {
-                  isLoggedIn = true;
-                  username = usernameController.text;
+                  if (test) {
+                    isLoggedIn = true;
+                    username = usernameController.text;
+                    Navigator.of(context).pop();
+                    _showMessageDialog(context, "User angemeldet oder neu erstellt");
+                  }else{
+                    isLoggedIn = false;
+                    Navigator.of(context).pop();
+                    _showMessageDialog(context, "Nicht alle Daten angegeben.");
+                  }
                 });
-                Navigator.of(context).pop();
               },
             ),
           ],
