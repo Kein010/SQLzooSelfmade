@@ -1,4 +1,7 @@
 // answers.dart
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mysql_utils/mysql_utils.dart';
 import 'package:sql_zoo_selfmade/res/database.dart';
@@ -6,7 +9,7 @@ import 'package:sql_zoo_selfmade/res/userData.dart';
 
 //Future<MysqlUtils> connection = connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
 
-List<List<dynamic>> correctAnswersFirstPage = [
+List<List<String>> correctAnswersFirstPage = [
   
   /*
   sqlDynamicDynamic("SELECT * FROM actor"),  
@@ -21,7 +24,11 @@ List<List<dynamic>> correctAnswersFirstPage = [
   sqlDynamicDynamic("SELECT * FROM actor"),
   */
 
+  
+
+
   /*
+
   'Antwort 1.1',
   'Antwort 2.1',
   'Antwort 3.1',
@@ -108,13 +115,61 @@ List<String> userInput = [
 
 ];
 
-List<dynamic> sqlDynamicDynamic(String sql,  Future<MysqlUtils> connectionFuture) {
-  List<dynamic> dbList = [];
+List<List<String>> userAnswers = [
   
+  /*
+  sqlDynamicDynamic("SELECT * FROM actor"),  
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  sqlDynamicDynamic("SELECT * FROM actor"),
+  */
+
+  /*
+  'Antwort 1.1',
+  'Antwort 2.1',
+  'Antwort 3.1',
+  'Antwort 4.1',
+  'Antwort 5.1',
+  'Antwort 6.1',
+  'Antwort 7.1',
+  'Antwort 8.1',
+  'Antwort 9.1',
+  'Antwort 10.1',
+  */
+
+];
+
+List<String> testStrings = [
+  'Test 1.1',
+  'Test 2.1',
+  'Test 3.1',
+  'Test 4.1',
+  'Test 5.1',
+  'Test 6.1',
+  'Test 7.1',
+  'Test 8.1',
+  'Test 9.1',
+  'Test 10.1',
+];
+
+List<String> sqlDynamicDynamic(String sql,  Future<MysqlUtils> connectionFuture) {
+  List<String> dbList = [];
+  //List<Future<List<String>>> dbListFuture = [sqlDynamic(sql, connectionFuture)];
+
+  
+  //Future<List<String>> dbListFuture2 = dbListFuture[i];
+
+  //dbListFuture.add(sqlDynamic(sql, connectionFuture));
   sqlDynamic(sql, connectionFuture).then((result) {
-    result.forEach((row) {
+    for (var row in result) {
       dbList.add(row);
-    });
+    }
   });
 
   return dbList;
@@ -122,20 +177,67 @@ List<dynamic> sqlDynamicDynamic(String sql,  Future<MysqlUtils> connectionFuture
 
 void getUserInput(List<TextEditingController>  controller) {
   for (int i = 0; i < controller.length; i++) {
-    userInput.add(controller[0].text);
+    userInput.add(controller[i].text);
   }
 }
 
-void fillAnwerListFirstPage( Future<MysqlUtils> connectionFuture) {
+void fillAnwerListFirstPage(Future<MysqlUtils> connectionFuture) async{
+  List<List<String>> dbList = [];
+  
   for (int i = 0; i < 10; i++) {
-    correctAnswersFirstPage.add(sqlDynamicDynamic("SELECT * FROM actor", connectionFuture));
+    dbList.add(await (sqlDynamic("SELECT * FROM actor", connectionFuture)));
   }
+  correctAnswersFirstPage.addAll(dbList);
+  //return true;
 }
 
-bool compare(List<TextEditingController>  controller, int i,  Future<MysqlUtils> connectionFuture) {
-  getUserInput(controller);
-  fillAnwerListFirstPage(connectionFuture);
-  List<dynamic> dd = sqlDynamicDynamic(userInput[i], connectionFuture);
-  //connectionFuture.close();
-  return dd == correctAnswersFirstPage[i][0];
+void fillUserAnwerList(Future<MysqlUtils> connectionFuture) async{
+  List<List<String>> dbList = [];
+  
+  for (int i = 0; i < 10; i++) {
+    dbList.add(await (sqlDynamic(userInput[i], connectionFuture)));
+
+  }
+  userAnswers.addAll(dbList);
+  //return true;
 }
+
+void compare(List<TextEditingController>  controller, int i,  Future<MysqlUtils> connectionFuture){
+  getUserInput(controller);
+ 
+  //correctAnswersFirstPage.add(testStrings);
+  //userAnswers.add(userInput);
+  /*
+ if (await fillAnwerListFirstPage(connectionFuture) && await fillUserAnwerList(connectionFuture)) {
+   return true;
+ }else {
+   return false;
+ }
+ */
+  fillAnwerListFirstPage(connectionFuture);
+  fillUserAnwerList(connectionFuture);
+//for (int s = 0; s < 10; s++) {
+  //int s = 0 + i;
+  //if () {
+  //}
+
+ // return true;
+/*
+try {
+  return listEquals(userAnswers[i], correctAnswersFirstPage[i]);
+} catch (e) {
+  print(e);
+  return false;
+  
+}
+*/
+
+}
+/*
+  try {
+    return userAnswers[i][i] == correctAnswersFirstPage[i][i];
+  }catch (e) {
+    print(e);
+    return false;
+  }
+  */

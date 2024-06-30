@@ -87,15 +87,17 @@ Future resetDatabase(String query) async {
   }
 }
 
-Future<List<dynamic>> sqlDynamic(String sql, Future<MysqlUtils> connectionFuture) async {
+Future<List<String>> sqlDynamic(String sql, Future<MysqlUtils> connectionFuture) async {
   //final connection = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
-  List<dynamic> dbList = [];	
+  List<String> dbList = [];	
   var result;
    try {
     MysqlUtils connection = await connectionFuture;
     result = await connection.query(sql);
+    result.rows.forEach((row) {
+      dbList.add(row.toString());
+    });
     //result = connectionFuture.getOne(table: "actor", fields: "*");
-    dbList.add(result.rows);
   } catch (e) {
     print("Debuging error: ");
     print(e);

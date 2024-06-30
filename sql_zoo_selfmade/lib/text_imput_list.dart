@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class _TextInputListState extends State<TextInputList> {
                           SizedBox(height: 2),
                           TextField(
                             controller: _controllers[i],
+                            onChanged: (value) => compare(_controllers,i,connection),
                           ),
                           SizedBox(height: 2),
                           Text(
@@ -58,13 +60,15 @@ class _TextInputListState extends State<TextInputList> {
                         onPressed: () {
                           setState(() {
                             
+                           
                             //List wasd = await sqlDynamic(_controllers[i].text); sqlDynamicDynamic(_controllers[i].text) == widget.correctAnswers[i]
                             //List aadwdwa = await widget.correctAnswers[i];
                             //print("debug:");
                             //connection.close();
                             //connectToDatabaseTest();
                             //connection = connectToDatabase("127.0.0.1", 3306, "userApp", "ponkaPieYeeto", "sakila");
-                            _results[i] = compare(_controllers,i,connection) ? 'correct' : 'wrong';
+                            //userAnswers[i][i] == correctAnswersFirstPage[i][i] userAnswers[0][i] == correctAnswersFirstPage[i][i]
+                            _results[i] = listEquals(userAnswers[i], correctAnswersFirstPage[i]) ? 'correct' : 'wrong';
                           });
                         },
                         child: Text('Check'),
