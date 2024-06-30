@@ -53,10 +53,11 @@ class _TextInputListState extends State<TextInputList> {
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            //List wasd = await sqlDynamic(_controllers[i].text);
-                            //List aadwdwa = await widget.correctAnswers[i];
+                            //List wasd = getUserAnswers(_controllers[i].text);//sqlDynamicDynamic(_controllers[i].text); //sqlDynamicDynamic(_controllers[i].text) == widget.correctAnswers[i]
+                            //List aadwdwa = widget.correctAnswers[i];
                             //print("debug:");
-                            _results[i] = sqlDynamicDynamic(_controllers[i].text) == widget.correctAnswers[i] ? 'correct' : 'wrong';
+                            getUserInput(_controllers);
+                            _results[i] = comparison(i) ? 'correct' : 'wrong';
                           });
                         },
                         child: Text('Check'),

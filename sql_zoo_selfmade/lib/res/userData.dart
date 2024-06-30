@@ -82,7 +82,7 @@ Future resetDatabase(String query) async {
       
       await connection.query(sqlInsert);
   } finally {
-    await connection.close();
+    connection.close();
   }
 }
 
@@ -97,30 +97,39 @@ Future<List<dynamic>> sqlDynamic(String sql) async {
     print("Debuging error: ");
     print(e);
   }finally {
-    await connection.close();
+    connection.close();
   }
   return dbList;
 }
 
 //TODO - get rid of this
-Future<ResultFormat> sql(String sql, Future<MysqlUtils> connectionFuture) async {
-  List<String> dbStringList = [];	
-  MysqlUtils connection;
+List<dynamic> sqlAVS(String sql, MysqlUtils connectionPara) {
+  //List<String> dbStringList = [];	
+  //MysqlUtils connection;
+  List<dynamic> dbList = [];
 
   var result;
   try {
-    connection = await connectionFuture;
-    result = await connection.query(sql);
-    
+    connectionPara.startTrans();
+
+    //connection = connectionPara;
+    result = connectionPara.query(sql);
+    dbList.add(result.rows);
+
+    connectionPara.commit();
+    connectionPara.close();
+
+    /*
     result.rows.forEach((row) {
       dbStringList.add(row.toString());
     });
-    
+    */
+
   } catch (e) {
     print("Debuging error: ");
     print(e);
   }
-  return result;
+  return dbList;
 }
 
 Future<ResultFormat> sqlAutoConn(String sql) async {
@@ -154,6 +163,7 @@ void connectToDatabaseTest() async {
 
     print("Debuging show results in query: ");
     print(results.rows);
+    conn.close();
   }catch (e) {
     print("debuging error: ");
     print(e);

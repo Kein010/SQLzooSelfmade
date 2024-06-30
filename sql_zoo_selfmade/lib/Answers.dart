@@ -1,11 +1,11 @@
 // answers.dart
-import 'dart:js_interop';
-
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:mysql_utils/mysql_utils.dart';
 import 'package:sql_zoo_selfmade/res/database.dart';
 import 'package:sql_zoo_selfmade/res/userData.dart';
 
-//Future<MysqlUtils> connection = connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
+MysqlUtils connection = connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
 
 final List<List<dynamic>> correctAnswersFirstPage = [
   
@@ -103,14 +103,73 @@ final List<String> fixedTextsSecondPage = [
   'Fester Text 10.2',
 ];
 
-List<dynamic> sqlDynamicDynamic(String sql) {
-  List<dynamic> dbList = [];
-  
-  sqlDynamic(sql).then((result) {
-    result.forEach((row) {
-      dbList.add(row);
-    });
-  });
+final List<String> userInput = [
+];
 
-  return dbList;
+List<dynamic> sqlDynamicDynamic(String sql) {
+  //List<dynamic> dbList = [];
+ //sqlAVS(sql,connection);
+
+  
+/*
+  sqlAVS(sql,connection).then((result) {
+    for (var row in result) {
+      dbList.add(row);
+    }
+    
+  });
+*/
+
+  return sqlAVS(sql, connection);
+}
+
+List<List<dynamic>> getUserAnswers(List<String> userInput) {
+  List<List<dynamic>> dbListList = [];
+  dbListList = [sqlDynamicDynamic(userInput[userInput.length - 10]),
+  sqlDynamicDynamic(userInput[userInput.length - 9]),
+  sqlDynamicDynamic(userInput[userInput.length - 8]),
+  sqlDynamicDynamic(userInput[userInput.length - 7]),
+  sqlDynamicDynamic(userInput[userInput.length - 6]),
+  sqlDynamicDynamic(userInput[userInput.length - 5]),
+  sqlDynamicDynamic(userInput[userInput.length - 4]),
+  sqlDynamicDynamic(userInput[userInput.length - 3]),
+  sqlDynamicDynamic(userInput[userInput.length - 2]),
+  sqlDynamicDynamic(userInput[userInput.length - 1]),
+  ];
+  return dbListList;
+}
+
+bool comparison(int i) {
+  List list1 = [];
+ 
+ /*
+  for (int s = 0; s < userInput.length; s++) {
+    list1.add(getUserAnswers(userInput[s]));
+  }
+  */
+
+  list1.add(getUserAnswers(userInput));
+
+
+  List list2 = correctAnswersFirstPage;
+
+return listEquals(list1[i], list2[i]);
+
+/*
+  if (list1.length != list2.length) {
+    return false;
+  }
+  for (int i = 0; i < list1.length; i++) {
+    if (list1[i] != list2[i]) {
+      return false;
+    }
+  }
+  return true;
+  */
+}
+
+void getUserInput(List<TextEditingController> controller) {
+  for (int i = 0; i < controller.length; i++) {
+    userInput.add(controller[0].text);
+  }
 }
