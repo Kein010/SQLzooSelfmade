@@ -44,16 +44,16 @@ List<List<String>> correctAnswersFirstPage = [
 ];
 
 List<String> fixedTextsFirstPage = [
-  'Fester Text 1.1',
-  'Fester Text 2.1',
-  'Fester Text 3.1',
-  'Fester Text 4.1',
-  'Fester Text 5.1',
-  'Fester Text 6.1',
-  'Fester Text 7.1',
-  'Fester Text 8.1',
-  'Fester Text 9.1',
-  'Fester Text 10.1',
+  'Schriebe einen SELECT Befehl um die actor_id Spalte ausgegeben zu lassen.',
+  'Schriebe einen SELECT Befehl um die actor_id und die name Spalte ausgegeben zu lassen. ',
+  'Schreibe einen SELECT-Befehl, um alle Mitarbeiter aus der Tabelle staff auszugeben, die den Nachnamen ALLLEN haben.',
+  'Schreibe einen SELECT-Befehl, um alle Einträge der Tabelle payment auszugeben und diese nach dem Gehalt (amount) absteigend zu sortieren. ',
+  'Schreibe einen SELECT-Befehl, um alle Filme (film) aus der Tabelle film auszugeben, die aus der Kategorie /''Action/'' stammen und sortiere die Ergebnisse nach dem Titel (title) in aufsteigender Reihenfolge.',
+  'Schreibe einen DELETE-Befehl, um alle Kunden (customer) aus der Tabelle customer zu löschen, deren Nachname /''Smith/'' ist.',
+  'Schreibe einen INSERT INTO-Befehl, um einen neuen Film (film) in die Tabelle film einzufügen. Der Titel des Films soll /''New Action Movie/'' sein, die Beschreibung soll /''An exciting new action movie/'' lauten, und er soll in der Kategorie /''Action/'' sein.',
+  'Schreibe einen DELETE-Befehl, um den Film mit dem Titel /''Old Movie/'' aus der Tabelle film zu löschen, und einen INSERT INTO-Befehl, um einen neuen Film mit dem Titel /''Jurassic Park 10/'', der Beschreibung /''An updated version of the classic/'', und der Kategorie /''Drama/'' in die Tabelle film einzufügen. ',
+  'Schreibe einen SELECT-Befehl, der die Titel aller Filme (film) und die Namen der Kategorien (category) anzeigt, zu denen sie gehören.',
+  'Schreibe einen SELECT-Befehl, der alle Kundennamen (customer) und die Titel der Filme (film) anzeigt, die sie ausgeliehen haben. Zeige auch Kunden an, die keine Filme ausgeliehen haben.',
 ];
 
 List<List<dynamic>> correctAnswersSecondPage = [
@@ -177,6 +177,7 @@ List<String> sqlDynamicDynamic(String sql,  Future<MysqlUtils> connectionFuture)
 
 void getUserInput(List<TextEditingController>  controller) {
   for (int i = 0; i < controller.length; i++) {
+    userInput.clear();
     userInput.add(controller[i].text);
   }
 }
@@ -186,7 +187,9 @@ void fillAnwerListFirstPage(Future<MysqlUtils> connectionFuture) async{
   
   for (int i = 0; i < 10; i++) {
     dbList.add(await (sqlDynamic("SELECT * FROM actor", connectionFuture)));
+    resetDatabase();
   }
+  correctAnswersFirstPage.clear();
   correctAnswersFirstPage.addAll(dbList);
   //return true;
 }
@@ -194,10 +197,12 @@ void fillAnwerListFirstPage(Future<MysqlUtils> connectionFuture) async{
 void fillUserAnwerList(Future<MysqlUtils> connectionFuture) async{
   List<List<String>> dbList = [];
   
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < userInput.length; i++) {
     dbList.add(await (sqlDynamic(userInput[i], connectionFuture)));
-
+    resetDatabase();
   }
+
+  userAnswers.clear();
   userAnswers.addAll(dbList);
   //return true;
 }

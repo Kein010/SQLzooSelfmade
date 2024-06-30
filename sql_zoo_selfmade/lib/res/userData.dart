@@ -3,6 +3,11 @@ import 'package:sql_zoo_selfmade/answers.dart';
 import 'package:sql_zoo_selfmade/res/database.dart';
 import 'dart:io';
 
+
+bool isLoggedIn = false;
+
+
+
 //TODO: check if user entert only one username or password corectly -> give right message
 //TODO: give different messages when user is created or already exists
 //TODO: add better error handling/ cases that can come up
@@ -73,13 +78,13 @@ Future <bool> deleteUser(String email) async{
 }
 
 // untested but otherwise everything is ready to continue
-Future resetDatabase(String query) async {
+Future resetDatabase() async {
  final connection = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
   try {
       
       
       //Get SQL commands from file
-      String sqlInsert = await File('InsertData.sql').readAsString();
+      String sqlInsert = await File('lib/res/InsertData.sql').readAsString();
       
       await connection.query(sqlInsert);
   } finally {
@@ -165,4 +170,15 @@ void connectToDatabaseTest() async {
     conn.close();
   }
   //print(results);
+}
+
+void setIsLoggedIn(bool isLoggedIn) {
+  isLoggedIn = isLoggedIn;
+}
+
+bool checkLogin(){
+  if (isLoggedIn) {
+    return true;
+  }
+  return false;
 }

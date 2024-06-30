@@ -17,6 +17,8 @@ class SecondPage extends StatelessWidget {
         correctAnswers: correctAnswersSecondPage,
         fixedTexts: fixedTextsSecondPage,
       ),
+      
     );
+    
   }
 }
