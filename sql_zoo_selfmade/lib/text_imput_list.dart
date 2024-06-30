@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mysql_utils/mysql_utils.dart';
 import 'package:sql_zoo_selfmade/Answers.dart';
+import 'package:sql_zoo_selfmade/res/database.dart';
 import 'package:sql_zoo_selfmade/res/userData.dart';
 
 class TextInputList extends StatefulWidget {
@@ -17,6 +20,7 @@ class TextInputList extends StatefulWidget {
 class _TextInputListState extends State<TextInputList> {
   final List<TextEditingController> _controllers = List.generate(10, (_) => TextEditingController());
   final List<String?> _results = List.generate(10, (_) => null);
+  Future<MysqlUtils>connection = connectToDatabaseFuture("127.0.0.1", 3306, "userApp", "ponkaPieYeeto", "sakila");
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +57,14 @@ class _TextInputListState extends State<TextInputList> {
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            //List wasd = await sqlDynamic(_controllers[i].text);
+                            
+                            //List wasd = await sqlDynamic(_controllers[i].text); sqlDynamicDynamic(_controllers[i].text) == widget.correctAnswers[i]
                             //List aadwdwa = await widget.correctAnswers[i];
                             //print("debug:");
-                            _results[i] = sqlDynamicDynamic(_controllers[i].text) == widget.correctAnswers[i] ? 'correct' : 'wrong';
+                            //connection.close();
+                            //connectToDatabaseTest();
+                            //connection = connectToDatabase("127.0.0.1", 3306, "userApp", "ponkaPieYeeto", "sakila");
+                            _results[i] = compare(_controllers,i,connection) ? 'correct' : 'wrong';
                           });
                         },
                         child: Text('Check'),

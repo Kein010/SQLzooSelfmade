@@ -1,4 +1,5 @@
 import 'package:mysql_utils/mysql_utils.dart';
+import 'package:sql_zoo_selfmade/answers.dart';
 import 'package:sql_zoo_selfmade/res/database.dart';
 import 'dart:io';
 
@@ -86,18 +87,18 @@ Future resetDatabase(String query) async {
   }
 }
 
-Future<List<dynamic>> sqlDynamic(String sql) async {
-  final connection = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
+Future<List<dynamic>> sqlDynamic(String sql, Future<MysqlUtils> connectionFuture) async {
+  //final connection = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
   List<dynamic> dbList = [];	
   var result;
    try {
+    MysqlUtils connection = await connectionFuture;
     result = await connection.query(sql);
+    //result = connectionFuture.getOne(table: "actor", fields: "*");
     dbList.add(result.rows);
   } catch (e) {
     print("Debuging error: ");
     print(e);
-  }finally {
-    await connection.close();
   }
   return dbList;
 }
@@ -147,8 +148,9 @@ Future<ResultFormat> sqlAutoConn(String sql) async {
 void connectToDatabaseTest() async {
   print("Debuging show results in connectToDatabase method: ");
   //print(results);
+  final conn = await connectToDatabaseFuture("127.0.0.1", 3306, "root", "root", "sakila");
   try {
-    final conn = await connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
+    
 
     var results = await conn.query("SELECT * FROM actor");
 
@@ -157,6 +159,8 @@ void connectToDatabaseTest() async {
   }catch (e) {
     print("debuging error: ");
     print(e);
+  }finally {
+    conn.close();
   }
   //print(results);
 }

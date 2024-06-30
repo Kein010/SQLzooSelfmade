@@ -1,15 +1,14 @@
 // answers.dart
-import 'dart:js_interop';
-
+import 'package:flutter/material.dart';
 import 'package:mysql_utils/mysql_utils.dart';
 import 'package:sql_zoo_selfmade/res/database.dart';
 import 'package:sql_zoo_selfmade/res/userData.dart';
 
 //Future<MysqlUtils> connection = connectToDatabase("127.0.0.1", 3306, "root", "root", "sakila");
 
-final List<List<dynamic>> correctAnswersFirstPage = [
+List<List<dynamic>> correctAnswersFirstPage = [
   
-  
+  /*
   sqlDynamicDynamic("SELECT * FROM actor"),  
   sqlDynamicDynamic("SELECT * FROM actor"),
   sqlDynamicDynamic("SELECT * FROM actor"),
@@ -20,7 +19,8 @@ final List<List<dynamic>> correctAnswersFirstPage = [
   sqlDynamicDynamic("SELECT * FROM actor"),
   sqlDynamicDynamic("SELECT * FROM actor"),
   sqlDynamicDynamic("SELECT * FROM actor"),
-  
+  */
+
   /*
   'Antwort 1.1',
   'Antwort 2.1',
@@ -36,7 +36,7 @@ final List<List<dynamic>> correctAnswersFirstPage = [
 
 ];
 
-final List<String> fixedTextsFirstPage = [
+List<String> fixedTextsFirstPage = [
   'Fester Text 1.1',
   'Fester Text 2.1',
   'Fester Text 3.1',
@@ -49,9 +49,9 @@ final List<String> fixedTextsFirstPage = [
   'Fester Text 10.1',
 ];
 
-final List<List<dynamic>> correctAnswersSecondPage = [
+List<List<dynamic>> correctAnswersSecondPage = [
   
-  
+  /*
   sqlDynamicDynamic("SELECT * FROM actor"),  
   sqlDynamicDynamic("SELECT * FROM actor"),
   sqlDynamicDynamic("SELECT * FROM actor"),
@@ -62,6 +62,7 @@ final List<List<dynamic>> correctAnswersSecondPage = [
   sqlDynamicDynamic("SELECT * FROM actor"),
   sqlDynamicDynamic("SELECT * FROM actor"),
   sqlDynamicDynamic("SELECT * FROM actor"),
+  */
 
   /*
   sql("SELECT * FROM actor", connection),  
@@ -90,7 +91,7 @@ final List<List<dynamic>> correctAnswersSecondPage = [
   */
 ];
 
-final List<String> fixedTextsSecondPage = [
+List<String> fixedTextsSecondPage = [
   'Fester Text 1.2',
   'Fester Text 2.2',
   'Fester Text 3.2',
@@ -103,14 +104,38 @@ final List<String> fixedTextsSecondPage = [
   'Fester Text 10.2',
 ];
 
-List<dynamic> sqlDynamicDynamic(String sql) {
+List<String> userInput = [
+
+];
+
+List<dynamic> sqlDynamicDynamic(String sql,  Future<MysqlUtils> connectionFuture) {
   List<dynamic> dbList = [];
   
-  sqlDynamic(sql).then((result) {
+  sqlDynamic(sql, connectionFuture).then((result) {
     result.forEach((row) {
       dbList.add(row);
     });
   });
 
   return dbList;
+}
+
+void getUserInput(List<TextEditingController>  controller) {
+  for (int i = 0; i < controller.length; i++) {
+    userInput.add(controller[0].text);
+  }
+}
+
+void fillAnwerListFirstPage( Future<MysqlUtils> connectionFuture) {
+  for (int i = 0; i < 10; i++) {
+    correctAnswersFirstPage.add(sqlDynamicDynamic("SELECT * FROM actor", connectionFuture));
+  }
+}
+
+bool compare(List<TextEditingController>  controller, int i,  Future<MysqlUtils> connectionFuture) {
+  getUserInput(controller);
+  fillAnwerListFirstPage(connectionFuture);
+  List<dynamic> dd = sqlDynamicDynamic(userInput[i], connectionFuture);
+  //connectionFuture.close();
+  return dd == correctAnswersFirstPage[i][0];
 }

@@ -30,7 +30,35 @@ import 'package:mysql_utils/mysql_utils.dart';
 /// - [errorLog]: A callback function that logs errors.
 /// - [sqlLog]: A callback function that logs SQL statements.
 /// - [connectInit]: A callback function that is called when the connection is initialized.
-Future<MysqlUtils> connectToDatabase(String host, int port, String user, String password, String db) async {
+Future<MysqlUtils> connectToDatabaseFuture(String host, int port, String user, String password, String db) async {
+  var connectionResult = MysqlUtils(
+    settings: {
+      'host': host,
+      'port': port,
+      'user': user,
+      'password': password,
+      'db': db,
+      'maxConnections': 10,
+      'secure': true,
+      'prefix': '',
+      'pool': true,
+      'collation': 'utf8mb4_general_ci',
+      'sqlEscape': true,
+    },
+    errorLog: (error) {
+      print(error);
+    },
+    sqlLog: (sql) {
+      print(sql);
+    },
+    connectInit: (db1) async {
+      print('whenComplete');
+    },
+  );
+  return connectionResult; //TODO add error hanlding where this method is getting called
+}
+
+MysqlUtils connectToDatabase(String host, int port, String user, String password, String db)  {
   var connectionResult = MysqlUtils(
     settings: {
       'host': host,
