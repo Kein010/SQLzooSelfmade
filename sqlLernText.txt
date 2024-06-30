@@ -1,0 +1,531 @@
+SQL Übungen 
+
+ 
+
+    Was ist SQL? 
+
+ 
+
+Klären wir als erstes wofür die Abkürzung steht. 
+
+SQL = Standart Query Language 
+
+Das heißt SQL ist nicht einfach eine weitere Programmiersprache und damit ist gemeint, Sie ist gar keine. Auch wenn man oft in der Softwareentwicklung von Ihr hört, ist Sie eine Abfrage-Sprache. 
+
+ 
+
+Also wofür Braucht man jetzt eine Abfragesprache? Für Datenbanken. Oft werden Daten die über ein Programm gesammelt, Verwaltet, Zusammengetragen oder Eingetragen werden, in einer Datenbank gespeichert. Im Folgendem wird dabei auf die Relationellen Datenbanken eingegangen und wie Sie via SQL  befüllt, geleert und verändert werden können und wie man Daten von Ihnen abruft. Es gibt auch viele weitere Arten von Datenbanken wie zum Beispiel die NoSQL-Datenbank oder die Objektorientierte-Datenbank. 
+
+Eine Relationelle Datenbank kann man sich dabei als Ansammlung von Tabellen vorstellen in denen Daten in Zeilen (Rows) und Spalten (Columns) gespeichert sind. Dabei hat jede Spalte Ihre eigenen Bedingungen, die erfüllt sein müssen um dort auch Daten eintragen zu können. Mann soll ja nicht einfach in eine Datums-Spalte einen Namen eintragen können. 
+
+ 
+
+Wie Hängt das jetzt mit der Sprache SQL zusammen? Anders als bei Excel gibt es bei Datenbanken keine Möglichkeit einfach auf eine Zeile oder Eine Spalte zuzugreifen und etwas einzutragen oder zu löschen. Es gibt Programme die das editieren von Datenbanken vereinfachen, doch auch diese nutzen im Hntergrund SQL befehle für Ihre Funktionen. 
+
+SQL ist dabei ein Standard der entwickelt wurde um möglichst einheitlich das Editieren solcher Datenbanken zu vereinfachen und der im besten Fall von allen Datenbanken genutzt wird. Da sich nicht alle daran halten gibt es unter den verschiedenen Datenbanken teilweise größere oder kleinere Syntaxunterschiede. 
+
+ 
+
+Im Folgenden gibt es einige Aufgaben, die helfen sollen die Grundlagen von SQL zu lernen und Sie anwenden zu können. Dabei wird es Aufgaben zum ausgeben speziefisch gesuchter Daten geben, sowie zum einfügen und löschen von Datensätzen. 
+
+  
+
+    Was ist ein SELECT Statement 
+
+ 
+
+Als erstes wird es um das SELECT Statement gehen. 
+
+ 
+
+In SQL sollte man vor allem darauf achten Alles, was sich nicht auf einen Tabellen- oder Spaltennamen bezieht, groß zu schreiben. Warum? Auch wenn einige Oberflächen, mit denen auf Datenbanken zugegriffen wird, mit kleinen Buchstaben klarkommen, oder kleine Buchstaben in große umwandeln, wenn Sie eine Funktion erkennen, entspricht es dem Standard alles groß zu schreiben und so ist die kompatibilität deines Codes für die verschiedenen Oberflächen gesichert. 
+
+ 
+
+Ein SELECT Statement ist dafür gedacht in der Datenbank eine Tabelle anzuwählen und sich Daten aus eben dieser ausgeben zu lassen. 
+
+ 
+
+Bsp. Tabellen-Name: actor 
+
+ 
+
+SELECT * FROM actor; 
+
+ 
+
+Das Sternchen * ist hierbei ein Aufruf aller Daten der Tabelle und mit FROM bestimmen wir aus welcher Tabelle wir die Daten holen.  
+
+Das * können wir auch durch Spaltennamen ersetzen. 
+
+ 
+
+Aufgabe: 
+
+Schriebe einen SELECT Befehl um die actor_id Spalte ausgegeben zu lassen. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+ 
+
+Es ist auch möglich mehrere Spalten anzusprechen und Sie sich ausgeben zulassen. Dafür müssen die jeweiligen Namen nur durch ein Komma getrennt werden. 
+
+ 
+
+Aufgabe: 
+
+Schriebe einen SELECT Befehl um die actor_id und die name Spalte ausgegeben zu lassen. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+    Nutzung von WHERE und ORDER BY in SQL 
+
+ 
+
+Im Folgenden wird auf die WHERE- und ORDER-BY-Statements eingegangen. 
+
+ 
+
+Wie bei allen SQL-Befehlen ist es auch hier wichtig, alles, was sich nicht auf einen Tabellen- oder Spaltennamen bezieht, groß zu schreiben. Dies sichert die Kompatibilität deines Codes für verschiedene Datenbanken. 
+
+ 
+
+  
+
+3.1 Der WHERE-Befehl 
+
+ 
+
+Mit dem WHERE-Befehl können wir Datensätze filtern. Das heißt, wir können Bedingungen festlegen, die die Datensätze erfüllen müssen, um in der Ausgabe zu erscheinen. Der WHERE-Befehl wird dabei einfach mit dem SELECT-Befehl kombiniert. 
+
+So ist es einfach eine Abfrage spezifische und komplexer zu schreiben. 
+
+ 
+
+Beispiel: Tabellen-Name: actor 
+
+ 
+
+Sql: 
+
+ 
+
+SELECT * FROM actor  WHERE last_name = ‘HARRIS‘; 
+
+ 
+
+In diesem Beispiel werden alle Kunden aus der Tabelle customer ausgewählt, die in der Stadt Berlin wohnen. Der WHERE-Befehl spezifiziert die Bedingung city = 'Berlin'. 
+
+ 
+
+Aufgabe: 
+
+Schreibe einen SELECT-Befehl, um alle Mitarbeiter aus der Tabelle staff auszugeben, die den Nachnamen ALLLEN haben. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+3.2 Der ORDER BY-Befehl 
+
+ 
+
+Mit dem ORDER BY-Befehl können wir die Ausgabe der Datensätze sortieren. Standardmäßig wird aufsteigend (ASC) sortiert. Wenn wir absteigend sortieren möchten, verwenden wir DESC. 
+
+ 
+
+Beispiel: Tabellen-Name: employee 
+
+ 
+
+Sql: 
+
+ 
+
+SELECT * FROM actor ORDER BY last_name ASC; 
+
+ 
+
+In diesem Beispiel werden alle Schauspieler aus der Tabelle actor nach ihrem Nachnamen in aufsteigender Reihenfolge sortiert. 
+
+ 
+
+Aufgabe: 
+
+Schreibe einen SELECT-Befehl, um alle Einträge der Tabelle payment auszugeben und diese nach dem Gehalt (amount) absteigend zu sortieren. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+  
+
+3.3 Kombination von WHERE und ORDER BY 
+
+ 
+
+Es ist auch möglich, WHERE und ORDER BY in einem einzigen SELECT-Befehl zu kombinieren, um gefilterte und sortierte Daten zu erhalten. 
+
+ 
+
+Beispiel: Tabellen-Name: payment 
+
+ 
+
+Sql: 
+
+ 
+
+SELECT * FROM payment WHERE amount > 4.99 ORDER BY rental_id DESC; 
+
+ 
+
+In diesem Beispiel werden alle Zahlungen aus der Tabelle payment ausgewählt, deren Betrag  höher als 4.99 ist, und die Ergebnisse werden nach der rental_id in absteigender Reihenfolge sortiert. 
+
+ 
+
+Aufgabe:  
+
+Schreibe einen SELECT-Befehl, um alle Filme (film) aus der Tabelle film auszugeben, die aus der Kategorie 'Action' stammen und sortiere die Ergebnisse nach dem Titel (title) in aufsteigender Reihenfolge. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+ 
+
+    Nutzung von DELETE und INSERT INTO in SQL 
+
+ 
+
+4.1 Der DELETE-Befehl 
+
+ 
+
+Mit dem DELETE-Befehl können Datensätze aus einer Tabelle entfernt werden. Es ist wichtig, vorsichtig zu sein, da Daten dauerhaft gelöscht werden können. 
+
+ 
+
+Beispiel: Tabellen-Name: rental 
+
+ 
+
+Sql: 
+
+ 
+
+DELETE FROM rental WHERE rental_date < '2020-01-01'; 
+
+ 
+
+In diesem Beispiel werden alle Mietdatensätze aus der Tabelle rental gelöscht, deren Mietdatum vor dem 1. Januar 2020 liegt. 
+
+ 
+
+Aufgabe: 
+
+Schreibe einen DELETE-Befehl, um alle Kunden (customer) aus der Tabelle customer zu löschen, deren Nachname 'Smith' ist. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+  
+
+4.2 Der INSERT INTO-Befehl 
+
+ 
+
+Mit dem INSERT INTO-Befehl können neue Datensätze in eine Tabelle eingefügt werden. Die Spalten, in die die Daten eingefügt werden sollen, sowie die Werte, die eingefügt werden, müssen angegeben werden. 
+
+ 
+
+Beispiel: Tabellen-Name: actor 
+
+ 
+
+Sql: 
+
+ 
+
+INSERT INTO actor (first_name, last_name) VALUES ('John', 'Doe'); 
+
+In diesem Beispiel wird ein neuer Schauspieler mit dem Vornamen 'John' und dem Nachnamen 'Doe' in die Tabelle actor eingefügt. 
+
+ 
+
+Aufgabe: 
+
+Schreibe einen INSERT INTO-Befehl, um einen neuen Film (film) in die Tabelle film einzufügen. Der Titel des Films soll 'New Action Movie' sein, die Beschreibung soll 'An exciting new action movie' lauten, und er soll in der Kategorie 'Action' sein. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+4.3 Kombination von DELETE und INSERT INTO 
+
+ 
+
+DELETE und INSERT INTO können in einer sequenziellen Weise verwendet werden, um Daten zu manipulieren. Dies ist nützlich, wenn Daten aktualisiert werden sollen, indem alte Datensätze gelöscht und neue eingefügt werden. 
+
+ 
+
+Beispiel: Tabellen-Name: staff 
+
+ 
+
+Sql: 
+
+ 
+
+DELETE FROM staff WHERE staff_id = 1; 
+
+INSERT INTO staff (first_name, last_name, email) VALUES ('Jane', 'Smith', 'jane.smith@example.com'); 
+
+ 
+
+In diesem Beispiel wird der Mitarbeiter mit der staff_id 1 gelöscht und ein neuer Mitarbeiter mit dem Vornamen 'Jane', dem Nachnamen 'Smith' und der E-Mail-Adresse 'jane.smith@example.com' eingefügt. 
+
+ 
+
+Aufgabe: 
+
+Schreibe einen DELETE-Befehl, um den Film mit dem Titel 'Old Movie' aus der Tabelle film zu löschen, und einen INSERT INTO-Befehl, um einen neuen Film mit dem Titel 'Jurassic Park 10', der Beschreibung 'An updated version of the classic', und der Kategorie 'Drama' in die Tabelle film einzufügen. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+  
+
+    Nutzung von Joins in SQL 
+
+ 
+
+Joins in SQL ermöglichen es, Daten aus mehreren Tabellen basierend auf einer verwandten Spalte zu kombinieren. Es gibt verschiedene Arten von Joins, darunter INNER JOIN, LEFT JOIN, RIGHT JOIN und FULL OUTER JOIN. Diese Beispiele basieren auf der Sakila Beispiel-Datenbank. 
+
+ 
+
+5.1 Der INNER JOIN 
+
+ 
+
+Ein INNER JOIN kombiniert Zeilen aus zwei Tabellen basierend auf einer gemeinsamen Spalte und gibt nur die Zeilen zurück, die in beiden Tabellen übereinstimmen. 
+
+ 
+
+Beispiel: Tabellen customer und rental 
+
+ 
+
+Sql: 
+
+ 
+
+SELECT customer.first_name, customer.last_name, rental.rental_date 
+
+FROM customer 
+
+INNER JOIN rental ON customer.customer_id = rental.customer_id; 
+
+ 
+
+Dieser Befehl gibt die Vornamen, Nachnamen und Mietdaten aller Kunden zurück, die eine Miettransaktion haben. 
+
+ 
+
+Aufgabe: 
+
+Schreibe einen SELECT-Befehl, der die Titel aller Filme (film) und die Namen der Kategorien (category) anzeigt, zu denen sie gehören. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+  
+
+5.2 Der LEFT JOIN 
+
+ 
+
+Ein LEFT JOIN gibt alle Zeilen aus der linken Tabelle zurück und die übereinstimmenden Zeilen aus der rechten Tabelle. Wenn keine Übereinstimmung gefunden wird, wird NULL zurückgegeben. 
+
+ 
+
+Beispiel: Tabellen film und inventory 
+
+ 
+
+Sql: 
+
+ 
+
+SELECT film.title, inventory.inventory_id 
+
+FROM film 
+
+LEFT JOIN inventory ON film.film_id = inventory.film_id; 
+
+ 
+
+Dieser Befehl gibt alle Filmtitel und die zugehörigen Inventar-IDs zurück. Für Filme ohne Inventar wird NULL angezeigt. 
+
+ 
+
+Aufgabe : 
+
+Schreibe einen SELECT-Befehl, der alle Kundennamen (customer) und die Titel der Filme (film) anzeigt, die sie ausgeliehen haben. Zeige auch Kunden an, die keine Filme ausgeliehen haben. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+4.3 Der RIGHT JOIN 
+
+ 
+
+Ein RIGHT JOIN gibt alle Zeilen aus der rechten Tabelle zurück und die übereinstimmenden Zeilen aus der linken Tabelle. Wenn keine Übereinstimmung gefunden wird, wird NULL zurückgegeben. 
+
+ 
+
+Beispiel: Tabellen inventory und film 
+
+ 
+
+Sql: 
+
+ 
+
+SELECT inventory.inventory_id, film.title 
+
+FROM inventory 
+
+RIGHT JOIN film ON inventory.film_id = film.film_id; 
+
+ 
+
+Dieser Befehl gibt alle Inventar-IDs und die zugehörigen Filmtitel zurück. Für Filme ohne Inventar wird NULL angezeigt. 
+
+ 
+
+Aufgabe: 
+
+Schreibe einen SELECT-Befehl, der die Namen aller Schauspieler (actor) und die Titel der Filme (film) anzeigt, in denen sie mitgespielt haben. Zeige auch Filme an, die keinen Schauspieler zugeordnet haben. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+  
+
+5.4 Der FULL OUTER JOIN 
+
+ 
+
+Ein FULL OUTER JOIN kombiniert die Ergebnisse von LEFT JOIN und RIGHT JOIN. Er gibt alle Zeilen zurück, wenn es eine Übereinstimmung gibt, oder NULL, wenn keine Übereinstimmung gefunden wurde. 
+
+ 
+
+Beispiel: Tabellen customer und rental 
+
+ 
+
+Sql: 
+
+ 
+
+SELECT customer.first_name, customer.last_name, rental.rental_date 
+
+FROM customer 
+
+FULL OUTER JOIN rental ON customer.customer_id = rental.customer_id; 
+
+ 
+
+Dieser Befehl gibt alle Kundennamen und Mietdaten zurück. Kunden ohne Mietdaten und Mietdaten ohne Kunden werden ebenfalls angezeigt. 
+
+ 
+
+Aufgabe: 
+
+Schreibe einen SELECT-Befehl, der die Namen aller Kunden (customer) und die Namen der Mitarbeiter (staff) anzeigt, die ihnen geholfen haben. Zeige auch Kunden an, die keinen Mitarbeiter zugeordnet haben, und Mitarbeiter, die keinen Kunden zugeordnet haben. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+  
+
+    Übungsaufgaben 
+
+ 
+
+In den folgenden Übungsaufgaben kann das Gelernte nocheinmal kombiniert angewendet werden. 
+
+ 
+
+Aufgabe 1: Komplexe WHERE-Bedingung und ORDER BY 
+
+ 
+
+Schreibe einen SELECT-Befehl, um alle Filme aus der Tabelle film auszugeben, die entweder in der Kategorie 'Action' sind oder deren Länge (length) mehr als 120 Minuten beträgt. Die Ergebnisse sollen nach der Länge absteigend sortiert werden. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+ 
+
+Aufgabe 2: DELETE und INSERT INTO zusammen verwenden 
+
+ 
+
+Schreibe einen SQL-Befehl, der zuerst alle Filme aus der Tabelle film löscht, die in der Kategorie 'Horror' sind, und anschließend einen neuen Film mit dem Titel 'New Horror Film' und der Beschreibung 'A terrifying new horror experience' in die Tabelle film einfügt. Stelle sicher, dass die Transaktion atomar ist, d.h., entweder werden alle Löschungen und Einfügungen durchgeführt oder keine. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
+
+ 
+
+Aufgabe 3: INNER JOIN verwenden 
+
+ 
+
+Schreibe einen SELECT-Befehl, um die Namen der Kunden (first_name, last_name) und die Titel der Filme (title), die sie ausgeliehen haben, aus den Tabellen customer und film anzuzeigen. Verwende dazu die Tabelle rental, um die Verbindung zwischen Kunden und Filmen herzustellen. 
+
+ 
+
+[AUFGABENFELD EINSETZEN] 
+
+ 
