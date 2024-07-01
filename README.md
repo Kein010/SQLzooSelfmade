@@ -20,8 +20,3 @@ nicht funktionale Bedingung sind größtenteils zu irgnorieren oder so 😘
 https://www.darttutorial.org/dart-tutorial/dart-try-catch/
 https://dart.dev/language/error-handling
 
-https://pluser-my.sharepoint.com/:f:/g/personal/l_bull_prologistik_com/EgvKbjo6iFpAiaj5Wa8AO4gBOrZX_Y08HDxNj_0e6SpLOQ?e=LW5Chl
-
-https://pluser-my.sharepoint.com/:w:/g/personal/l_bull_prologistik_com/EauuEjFoj4JIluLZFCiQECMBvfKhH1aK2v8MqFjSy4bzEg?e=igodGA
-
-https://pluser-my.sharepoint.com/:w:/g/personal/l_bull_prologistik_com/Ecyau4J45HBDqFrd5pBHAb0B8byX6RchTtSD66Fb1CUvpg?e=vDw7xZ
